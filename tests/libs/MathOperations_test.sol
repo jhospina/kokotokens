@@ -23,7 +23,7 @@ contract MathOperationsTest {
 
     function checkSumIsOverflow() public {
         try INT_MAX.sum(100) returns (uint){
-
+            Assert.ok(false, "No reached!");
         } catch (bytes memory) {
             Assert.ok(true, 'overflow expected');
         }
@@ -43,7 +43,39 @@ contract MathOperationsTest {
 
     function checkSubtractIsOverflow() public {
         try INT_MIN.subtract(200) returns (uint){
+            Assert.ok(false, "No reached!");
+        } catch (bytes memory) {
+            Assert.ok(true, 'overflow expected');
+        }
+    }
 
+    function checkMultiplyIsSuccess() public {
+        // Give
+        uint valueA = 123;
+        uint valueB = 10;
+        uint expected = valueA * valueB;
+
+        // When
+        uint result = valueA.multiply(valueB);
+        // Then
+        Assert.equal(expected, result, "The multiply is wrong!");
+    }
+
+    function checkMultiplyIsZero() public {
+        // Give
+        uint valueA = 0;
+        uint valueB = 0;
+        uint expected = 0;
+
+        // When
+        uint result = valueA.multiply(valueB);
+        // Then
+        Assert.equal(expected, result, "The multiply is wrong!");
+    }
+
+    function checkMultiplyIsOverflow() public {
+        try INT_MAX.multiply(INT_MAX) returns (uint){
+            Assert.ok(false, "No reached!");
         } catch (bytes memory) {
             Assert.ok(true, 'overflow expected');
         }

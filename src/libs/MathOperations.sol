@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0;
 
+// Source: "https://gist.github.com/giladHaimov/8e81dbde10c9aeff69a1d683ed6870be"
+
 library MathOperations {
 
     function subtract(uint a, uint b) external pure returns (uint) {
@@ -18,11 +20,8 @@ library MathOperations {
         if (a == 0) {
             return 0;
         }
-
         uint c = a * b;
         require(c / a == b, "MathOperations: multiplication overflow");
-
         return c;
     }
 }
-
