@@ -29,7 +29,7 @@ contract MathOperationsTest {
         }
     }
 
-    function checkSubtracIsSuccess() public {
+    function checkSubtractIsSuccess() public {
         // Give
         uint valueA = 500;
         uint valueB = 51;
