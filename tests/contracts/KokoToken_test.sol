@@ -7,6 +7,7 @@ import "../../src/contracts/KokoToken.sol";
 contract KokoTokenTest {
 
     KokoToken kokoToken;
+    address _address;
 
     function beforeAll() public {
         kokoToken = new KokoToken();
@@ -14,6 +15,11 @@ contract KokoTokenTest {
 
     function checkGetTotalSupplyIsZero() public{
         Assert.equal(0, kokoToken.getTotalSupply(), "total supply is not Zero.");
+    }
+
+    function checkGetNewWalletIsSuccess() public{
+        kokoToken.addNewWallet(_address);
+        Assert.ok(true,"Is Success");
     }
 
 }

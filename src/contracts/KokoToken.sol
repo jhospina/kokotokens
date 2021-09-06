@@ -27,7 +27,7 @@ contract KokoToken is BaseToken {
     * @dev
     *
     * Define los propietarios y los delegados quienes tienen permiso de utilizar un monto asignado.
-    * @info: Ver Standard ERC-20 (https://eips.ethereum.org/EIPS/eip-20)
+    * Ver Standard ERC-20 (https://eips.ethereum.org/EIPS/eip-20)
     *
     * Owner: Propietario de los tokens
     * Delegate: Quienes puede hacer uso de esos tokens en nombre del propietario.
@@ -35,7 +35,7 @@ contract KokoToken is BaseToken {
     * Delegate => [WalletOwner, WalletOwner,...]
     *
     * */
-    mapping(address => mapping(address => int)) allowedWallets;
+    mapping(address => mapping(address => uint)) allowedWallets;
 
     /**
     * @dev
@@ -60,7 +60,6 @@ contract KokoToken is BaseToken {
     * Registra una nueva wallet con una cantidad de Zero(0) de tokens.
     * * Quien realiza la transacción (sender) queda registrado como delegado de esta nueva wallet.
     *
-    * @return uint
     * */
     function addNewWallet(address _address) override external {
         Wallet memory wallet = Wallet(_address, INT_MIN);
