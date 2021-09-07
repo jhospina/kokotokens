@@ -58,10 +58,11 @@ contract KokoToken is BaseToken {
     * @dev
     *
     * Registra una nueva wallet con una cantidad de Zero(0) de tokens.
-    * * Quien realiza la transacción (sender) queda registrado como delegado de esta nueva wallet.
+    * Quien realiza la transacción (sender) queda registrado como delegado de esta nueva wallet.
     *
     * */
-    function addNewWallet(address _address) override external {
+    function addNewWallet(address _address) override external returns (bool) {
+        // Crea una nueva wallet con la dirección indicada y un valor inicial de Zero tokens
         Wallet memory wallet = Wallet(_address, INT_MIN);
         // Valida que la wallet no se cuentre registrada.
         require(wallets[_address]._address!=_address, "Wallet address already exists");
@@ -69,6 +70,7 @@ contract KokoToken is BaseToken {
         wallets[_address] = wallet;
         // Habilita al sender para usar la nueva wallet
         allowedWallets[msg.sender][_address] = INT_MIN;
+        return true;
     }
 
     function increaseWalletBalanceSender(uint amount) override external {
