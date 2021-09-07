@@ -64,7 +64,7 @@ contract KokoToken is BaseToken {
     function addNewWallet(address _address) override external {
         Wallet memory wallet = Wallet(_address, INT_MIN);
         // Valida que la wallet no se cuentre registrada.
-        require(wallets[_address].balance == INT_MIN, "Wallet address already exists");
+        require(wallets[_address]._address!=_address, "Wallet address already exists");
         // Agrega la nueva wallet
         wallets[_address] = wallet;
         // Habilita al sender para usar la nueva wallet

@@ -2,6 +2,7 @@
 pragma solidity >=0.7.0;
 
 import "remix_tests.sol";
+import "remix_accounts.sol";
 import "../../src/contracts/KokoToken.sol";
 
 contract KokoTokenTest {
@@ -11,6 +12,7 @@ contract KokoTokenTest {
 
     function beforeAll() public {
         kokoToken = new KokoToken();
+        _address = TestsAccounts.getAccount(0);
     }
 
     function checkGetTotalSupplyIsZero() public{
