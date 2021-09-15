@@ -18,13 +18,13 @@ contract UpdateEtherPriceOperation is SuccessRequestListener {
     }
     
     function onSuccess(string memory result) external override {
-      require(address(this) == msg.sender, "This function must be call only by own contract");
+      require(externalAPI._getContractAddress() == msg.sender, "This function must be call only by own contract");
       // Se parsea los datos del resultado con 2 decimales
       etherPrice=result.parseInt(2);
     }
     
     function updatePrice() external payable {
-        externalAPI.requestUrl("https://api.kraken.com/0/public/Ticker?pair=ETHUSD","result.XETHZUSD.c.0");
+        externalAPI.requestUrl("https://api.kraken.com/0/public/Ticker?pair=ETHUSD", "result.XETHZUSD.c.0");
     }
     
     function getEtherPrice() external view returns(uint) {

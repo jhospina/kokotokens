@@ -7,4 +7,5 @@ import "./SuccessRequestListener.sol";
 abstract contract IExternalAPI is usingProvable {
     function setOnSuccessListener(SuccessRequestListener _listener) virtual external;
     function requestUrl(string memory endpoint, string memory pathData) virtual external payable;
+    function _getContractAddress() external virtual returns (address);
 }
