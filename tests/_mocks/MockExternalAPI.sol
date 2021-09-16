@@ -11,6 +11,7 @@ contract MockExternalAPI is IExternalAPI {
 
     mapping(bytes32 => string) results;
     bytes32[] resultKeys;
+    uint timestamp = 0;
 
     function setOnSuccessListener(SuccessRequestListener _listener) external override {
         listener = _listener;
@@ -20,7 +21,11 @@ contract MockExternalAPI is IExternalAPI {
         results[queryId] = _result;
         resultKeys.push(queryId);
     }
-
+    
+    function setCurrentTimestamp(uint _timestamp) external{
+        timestamp = _timestamp;
+    }
+    
     mapping(bytes32 => bool) internal idQueries;
 
     function requestUrl(string memory endpoint, string memory pathData) external override payable {
@@ -45,6 +50,13 @@ contract MockExternalAPI is IExternalAPI {
     
     function _getContractAddress() external override returns (address){
         return address(this);
+    }
+    
+    function _getCurrentTimestamp() external override virtual returns (uint){
+        if(timestamp == 0){
+            return block.timestamp;
+        }
+        return timestamp;
     }
 }
 

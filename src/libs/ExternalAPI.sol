@@ -10,11 +10,11 @@ abstract contract ExternalAPI is IExternalAPI {
 
     SuccessRequestListener listener;
 
-    function setOnSuccessListener(SuccessRequestListener _listener) external override{
+    function setOnSuccessListener(SuccessRequestListener _listener) external override {
         listener = _listener;
     }
 
-    mapping(bytes32=>bool) internal idQueries;
+    mapping(bytes32 => bool) internal idQueries;
 
     function requestUrl(string memory endpoint, string memory pathData) external override payable {
         uint gasRequired = provable_getPrice("URL", CUSTOM_GASLIMIT);
@@ -40,6 +40,10 @@ abstract contract ExternalAPI is IExternalAPI {
 
     function _getContractAddress() external override returns (address){
         return address(this);
+    }
+
+    function _getCurrentTimestamp() external override virtual returns (uint){
+        return block.timestamp;
     }
 
 }
